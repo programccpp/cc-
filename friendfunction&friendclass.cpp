@@ -1,32 +1,37 @@
-#include <iostream>
-class FriendClass;
-class MyClass
-{
+#include <iostream.h>
+class GFG {
 private:
-    int privateMember;
+	int private_variable;
+
+protected:
+	int protected_variable;
 
 public:
-    MyClass(int value) : privateMember(value) {}
-    friend void displayPrivateMember(const MyClass &obj);
-    friend class FriendClass;
+	GFG()
+	{
+		private_variable = 10;
+		protected_variable = 99;
+	}
+
+	// friend class declaration
+	friend class F;
 };
-void displayPrivateMember(const MyClass &obj)
-{
-    std::cout << "Friend Function: Accessing private member of MyClass - " << obj.privateMember << "\n";
-}
-class FriendClass
-{
+class F {
 public:
-    void accessPrivateMember(const MyClass &obj)
-    {
-        std::cout << "Friend Class: Accessing private member of MyClass - " << obj.privateMember << "\n";
-    }
+	void display(GFG& t)
+	{
+		cout << "The value of Private Variable = "
+			<< t.private_variable << endl;
+		cout << "The value of Protected Variable = "
+			<< t.protected_variable;
+	}
 };
+
+// Driver code
 int main()
 {
-    MyClass myObject(42);
-    displayPrivateMember(myObject);
-    FriendClass friendObj;
-    friendObj.accessPrivateMember(myObject);
-    return 0;
+	GFG g;
+	F fri;
+	fri.display(g);
+	return 0;
 }
